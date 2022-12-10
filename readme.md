@@ -40,8 +40,21 @@ token_code. token -> symbol
 35. right_brace -> }
 36. negation_operator -> -
 37. function_keyword -> function
+38. identifier -> id
 Part 4: 
-
+<stmt> --> <block> | <if_stmt> | <while_loop> | <assignment> | <do_while> | <for_loop>
+<block> --> `{`{<stmt>}`}`
+<if_stmt>   -->  `if``(`<bool_stmt> `)`<stmt>[`else ` <stmt>]
+<do_while> --> `do` <block> <while_loop>
+<while_loop> -->  `while``(`<bool_stmt>`)`<stmt>
+<for_loop> --> `for``(`<bool_stmt>`)`<block>
+<assignment> --> `var` <id> `=` <expr>
+<functions> -- > `function` <id> `(` <id> `)` <block>
+<expr> --> <term> {(`+`|`-`)<term>}
+<term> --> <factor>{(`*`|`/`|`%`)<factor>}
+<factor> --> <val> {`**`<val>}
+<val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
+<bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt>
 Part 5:
 Part 6: 
 Part 7:
