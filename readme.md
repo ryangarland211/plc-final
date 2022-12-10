@@ -42,8 +42,9 @@ token_code. token -> symbol
 37. function_keyword -> function
 38. identifier -> id
 Part 4: 
-<stmt> --> <block> | <if_stmt> | <while_loop> | <assignment> | <do_while> | <for_loop>
+<stmt> --> <block> | <if_stmt> | <assignment> | 
 <block> --> `{`{<stmt>}`}`
+<loop> --> <while_loop> | <do_while> | <for_loop>
 <if_stmt>   -->  `if``(`<bool_stmt> `)`<stmt>[`else ` <stmt>]
 <do_while> --> `do` <block> <while_loop>
 <while_loop> -->  `while``(`<bool_stmt>`)`<stmt>
@@ -55,15 +56,61 @@ Part 4:
 <factor> --> <val> {`**`<val>}
 <val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
 <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt>
+
 Part 5:
+<if_stmt>   -->  `if``(`<bool_stmt> `)`<stmt>[`else ` <stmt>]
+M_if(`if``(`<bool_stmt> `)`<stmt>, s) -->
+    if M_b(<bool_stmt>,s) == error
+        return error;
+    if M_b(<bool_stmt>,s)
+        if M_stmt(<stmt>,s) == error
+            return error
+        return M_stmt(<stmt>,s)
+
+M_if(`if``(`<bool_stmt> `)`<stmt1> `else ` <stmt2>, s) -->
+    if M_b(<bool_stmt>,s) == error
+        return error;
+    if M_b(<bool_stmt>,s)
+        if M_stmt(<stmt>,s) == error
+            return error
+        return M_stmt(<stmt1>,s)
+    else 
+        if M_stmt(<stmt2>,s) == error
+            return error
+        return M_stmt(<stmt2>,s)
+
 Part 6: 
+<while_loop> | <do_while> | <for_loop>
+M_loop(<while_loop> | <do_while> | <for_loop>,s) --> 
+    if M_while(`while``(`<bool_stmt>`)`<stmt>,s)
+        if M_b(<bool_stmt>,s)
+            if M_stmt(<stmt>,s) == error
+                return error
+            return M_stmt(<stmt1>,s)
+    if M_do_while(`do` <block> <while_loop>, s)
+        if M_block(`{`{<stmt>}`}`,s) == error
+            return error
+        else
+            return M_loop(<while_loop>)
+    if M_for_loop(`for``(`<bool_stmt>`)`<block>)
+        if M_b(<bool_stmt>,s)
+            if M_block(`{`{<stmt>}`}`,s) == error
+                return error
+            return M_block(<block>,s)
+
 Part 7:
+<expr> --> <term> {(`+`|`-`)<term>}
+M_expr(<term>)
+M_expr(<term> (`+`|`-`) <term>)
 Part 8:
+
 Part 9:
+
 Part 10:
 a.
 b.
 c.s
+
 Part 11:
 a.
 b.
