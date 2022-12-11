@@ -131,7 +131,6 @@ M_expr(<term>)
         if M_term(<val[1]>(`*`|`/`|`%`|`\*\*`)<val[2]>,s)
             if M_val(<val1>,s) == error
                 return error
-            
             elif M_val(<val2>,s) == error
                 return error
             else
@@ -142,11 +141,9 @@ M_expr(<term> (`+`|`-`) <term>)
             return error
         else
             if M_term(<val>,s)
-                if M_facotr(<val>,s) == error
-                    return error
-                else
-                    if M_facotr(<val>,s) 
-                        return <val>
+                if M_val(<val>,s) == error
+                    return error 
+                return <val>
 M_expr(<term> (`+`|`-`) <term>)
     if M_term(<val>,s) == error
         return error
@@ -168,49 +165,35 @@ M_expr(<term>)
     if M_term(<val>,s) == error
         return error
     else
-        if M_term(<val>,s)
-            if M_facotr(<val>,s) == error
+        if M_term(<val[1]>,s)
+            if M_facotr(<val[1]>,s) == error
                 return error
-            else
-                if M_val(<val>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                    return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+            return <val[1]> in <val>
 
 M_expr(<term>)
     if M_term(<val>,s) == error
         return error
     else
         if M_term(<val[1]>(`*`|`/`|`%`|`\*\*`)<val[2]>,s)
-            if M_val(<val1>,s) == error
+            if M_val(<val[1]>,s) == error
                 return error
-            elif M_val(<val2>,s) == error
+            elif M_val(<val[2]>,s) == error
                 return error
-            else
-                if M_val(<val1>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                elif  M_val(<val2>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+            
+            return (<val[1]> in <val>) && (<val[2]> in <val>)
 
 
 M_expr(<term> (`+`|`-`) <term>)
     if M_term(<val>,s) == error
             return error
         else
-            if M_term(<val>,s)
-                if M_facotr(<val>,s) == error
+            if M_term(<val[1]>,s)
+                if M_val(<val[1]>,s) == error
                     return error
-                el
-                    if M_val(<val>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                    return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+                return <val[1]> in <val>
 
 M_expr(<term> (`+`|`-`) <term>)
-    if M_term(<val>,s) == error
+    if M_term(<val[0]>,s) == error
         return error
     else
         if M_term(<val[1]>(`*`|`/`|`%`|`\*\*`)<val[2]>,s)
@@ -219,14 +202,7 @@ M_expr(<term> (`+`|`-`) <term>)
             
             elif M_val(<val2>,s) == error
                 return error
-            else
-                if M_val(<val1>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                elif  M_val(<val1>,s) 
-                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
-                        return error
-                return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+            return (<val[1]> in <val>) && (<val[2]> in <val>)
 
 Part 9:
 <assignment> --> `var` <id> `=` <expr>
