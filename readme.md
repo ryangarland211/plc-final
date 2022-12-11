@@ -100,9 +100,135 @@ M_loop(<while_loop> | <do_while> | <for_loop>,s) -->
 
 Part 7:
 <expr> --> <term> {(`+`|`-`)<term>}
+<term> --> <factor>{(`*`|`/`|`%`)<factor>}
+<factor> --> <val> {`**`<val>}
+<val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
 M_expr(<term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor>,s)
+            if M_facotr(<val>,s) == error
+                return error
+            else
+                if M_facotr(<val>,s) 
+                    return <val>
+M_expr(<term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor1>(`*`|`/`|`%`)<factor2>,s)
+            if M_factor(<val1>,s) == error
+                return error
+            elif M_factor(<val2>,s) == error
+                return error
+            else
+                return <val1>, <val2>
+
+M_expr(<term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor1>(`*`|`/`|`%`)<factor2>,s)
+            if M_factor(<val1>,s) == error
+                return error
+            
+            elif M_factor(<val2>,s) == error
+                return error
+            else
+                return <val1>, <val2>
+
 M_expr(<term> (`+`|`-`) <term>)
+    if M_term(<factor>,s) == error
+            return error
+        else
+            if M_term(<factor>,s)
+                if M_facotr(<val>,s) == error
+                    return error
+                else
+                    if M_facotr(<val>,s) 
+                        return <val>
+M_expr(<term> (`+`|`-`) <term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor1>(`*`|`/`|`%`)<factor2>,s)
+            if M_factor(<val1>,s) == error
+                return error
+            
+            elif M_factor(<val2>,s) == error
+                return error
+            else
+                return <val1>, <val2>
+
 Part 8:
+<expr> --> <term> {(`+`|`-`)<term>}
+<term> --> <factor>{(`*`|`/`|`%`)<factor>}
+<factor> --> <val> {`**`<val>}
+<val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+M_expr(<term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor>,s)
+            if M_facotr(<val>,s) == error
+                return error
+            else
+                if M_factor(<val>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                    return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+
+M_expr(<term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor1>(`*`|`/`|`%`)<factor2>,s)
+            if M_factor(<val1>,s) == error
+                return error
+            elif M_factor(<val2>,s) == error
+                return error
+            else
+                if M_factor(<val1>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                elif  M_factor(<val2>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+
+
+M_expr(<term> (`+`|`-`) <term>)
+    if M_term(<factor>,s) == error
+            return error
+        else
+            if M_term(<factor>,s)
+                if M_facotr(<val>,s) == error
+                    return error
+                el
+                    if M_factor(<val>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                    return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+
+M_expr(<term> (`+`|`-`) <term>)
+    if M_term(<factor>,s) == error
+        return error
+    else
+        if M_term(<factor1>(`*`|`/`|`%`)<factor2>,s)
+            if M_factor(<val1>,s) == error
+                return error
+            
+            elif M_factor(<val2>,s) == error
+                return error
+            else
+                if M_factor(<val1>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                elif  M_factor(<val1>,s) 
+                    if M_val(<id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)) == error
+                        return error
+                return <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
 
 Part 9:
 
