@@ -8,41 +8,41 @@ token_code. token -> symbol
 4. char_literal -> '{a-zA-Z,.\'\";:\\!@#%^&*()_-=+`~<>?/\t\n\f\b}'
 5. string_literal -> "{a-zA-Z,.\'\";:\\!@#%^&*()_-=+`~<>?/\t\n\f\b}\*"
 6. selection_keyword_if -> if
-6. selection_keyword_else -> else
-7. iteration_keyword_while -> while
-7. iteration_keyword_for -> for
-8. iteration_keyword_do -> do
-9. variable_keyword_var -> var
-10. type_keyword_nat -> nat
-11. type_keyword_bool -> bool
-12. type_keyword_char -> char
-13. type_keyword_string -> string
-14. type_keyword_real -> real
-16. addition_operator -> +
-17. subtraction_operator -> -
-18. multiplication_operator -> *
-19. division_operator -> /
-20. modulo_operator -> %
-21. assignment_operator -> =
-22. equality_operator -> ==
-23. inequality_operator -> !==  
-24. less_than_operator -> <
-25. greater_than_operator -> >
-26. less_than_or_equal_operator -> <==
-27. greater_than_or_equal_operator -> >==
-28. logical_and_operator -> &&
-29. logical_or_operator -> ||
-30. logical_not_operator -> !
-31. exponentiation_operator -> **
-32. left_parenthesis -> (
-33. right_parenthesis -> )
-34. left_brace -> {
-35. right_brace -> }
-36. negation_operator -> -
-37. function_keyword -> function
-38. identifier -> id
+7. selection_keyword_else -> else
+8. iteration_keyword_while -> while
+9. iteration_keyword_for -> for
+10. iteration_keyword_do -> do
+11. variable_keyword_var -> var
+12. type_keyword_nat -> nat
+13. type_keyword_bool -> bool
+14. type_keyword_char -> char
+15. type_keyword_string -> string
+16. type_keyword_real -> real
+17. addition_operator -> +
+18. subtraction_operator -> -
+19. multiplication_operator -> *
+20. division_operator -> /
+21. modulo_operator -> %
+22. assignment_operator -> =
+23. equality_operator -> ==
+24. inequality_operator -> !==  
+25. less_than_operator -> <
+26. greater_than_operator -> >
+27. less_than_or_equal_operator -> <==
+28. greater_than_or_equal_operator -> >==
+29. logical_and_operator -> &&
+30. logical_or_operator -> ||
+31. logical_not_operator -> !
+32. exponentiation_operator -> **
+33. left_parenthesis -> (
+34. right_parenthesis -> )
+35. left_brace -> {
+36. right_brace -> }
+37. negation_operator -> -
+38. function_keyword -> function
+39. identifier -> id
 Part 4: 
-<stmt> --> <block> | <if_stmt> | <assignment> | 
+<stmt> --> <block> | <if_stmt> | <assignment> | <empty>
 <block> --> `{`{<stmt>}`}`
 <loop> --> <while_loop> | <do_while> | <for_loop>
 <if_stmt>   -->  `if``(`<bool_stmt> `)`<stmt>[`else ` <stmt>]
@@ -54,7 +54,8 @@ Part 4:
 <expr> --> <term> {(`+`|`-`)<term>}
 <term> --> <val>{(`*`|`/`|`%`|`\*\*`)<val>}
 <val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
-<bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt>
+<bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`|`&&`|`||`) <expr>
+<empty> --> ``
 
 Part 5:
 <if_stmt>   -->  `if``(`<bool_stmt> `)`<stmt>[`else ` <stmt>]
