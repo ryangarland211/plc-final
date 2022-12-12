@@ -54,7 +54,7 @@ Part 4:
 <expr> --> <term> {(`+`|`-`)<term>}
 <term> --> <val>{(`*`|`/`|`%`|`\*\*`)<val>}
 <val> --> <id> | <real_literal> | <natural_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
-<bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`|`&&`|`||`) <expr>
+<bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> 
 <empty> --> ``
 
 Part 5:
